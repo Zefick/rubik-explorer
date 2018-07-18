@@ -1,0 +1,149 @@
+
+<htlm>
+
+<head>
+    <title>Rubik</title>
+    
+    <style>
+        input.flat {
+            font: 12pt 'Arial';
+            border: none;
+            padding: 10pt 20pt;
+            text-align: center;
+            cursor: pointer;
+            background-color: #CCC
+        }
+        input.move {
+            width: 80;
+            font: bold 12pt 'Arial';
+            padding: 5 5;
+            margin: 5 5;
+        }
+        table td.sticker {
+            text-align: center;
+            font: bold 12pt 'Arial';
+            width: 40px;
+            height: 40px;
+            padding: 0 0;
+            border: 1px solid;
+        }
+        div.mainArea {
+            padding: 20 30;
+            background-color: #EEF
+        }
+        div.mainArea {
+            display: inline-block;
+            border: 2px solid;
+            border-radius: 10px;
+        }
+    </style>
+    
+    <script src="kube.js"></script>
+    <script src="tests.js"></script>
+</head>
+
+<body onload="runTests()">
+
+    <div style="margin: auto; display:table;">
+        
+        <div class="mainArea">
+            <table>
+                <tr><td>
+                <table id='kube' style="margin: 10 auto;">
+                    <tr><td><td><div><td><td>
+                    <tr><td><div><td><div><td><div><td><div>
+                    <tr><td><td><div><td><td>
+                </table>
+                <td>
+                
+                <tr><td>
+                <div id='moves' style="margin: auto; display:table;">
+                    <!-- placeholder -->
+                </div>
+
+                <tr><td>
+                <table>
+                    <tr><td>
+                        <input type='text' class='formula' id='formula' size='50'
+                            style="font: 16pt 'Arial'; padding: 10 10;">
+                    </td></tr>
+                    <tr><td style="padding: 10 0">
+                        <input type='button' class='flat' value='Reset' onclick='reset()'>
+                        <input type='button' class='flat' value='Apply' onclick='apply()'>
+                        <input type='button' class='flat' value='Reverse' onclick='reverse()'>
+                    </td></tr>
+                </table>
+            </table>
+        </div>
+</body>
+
+<script>
+
+    let sides = document.querySelectorAll("#kube tr td div")
+    for (i in sides) {
+        let html = "<table border=1>"
+        for (let y=0; y<3; ++y) {
+            html += "<tr><td class='sticker'><td class='sticker'><td class='sticker'>"
+        }
+        sides[i].innerHTML = html + "</table>"
+    }
+    let letters = ["U", "L", "F", "R", "B", "D"]
+    let stickers = document.querySelectorAll("td.sticker")
+    for (i=0; i<6; i++) {
+        stickers[i*9+4].innerHTML = letters[i]
+    }
+    
+    let moves = [
+        ["R", "L", "U", "D", "F", "B"],
+        ["R&#39;", "L&#39;", "U&#39;", "D&#39;", "F&#39;", "B&#39;"],
+        ["M", "S", "E", "M&#39;", "S&#39;", "E&#39;"],
+        ["x", "y", "z", "x&#39;", "y&#39;", "z&#39;"],
+    ]
+    let movesTable = document.getElementById("moves")
+    for (i in moves) {
+        let html = "<br>"
+        for (j in moves[i]) {
+            let m = moves[i][j]
+            html += "<input type='button' class='flat move' value=\"" + m + "\" onclick='move(\"" + m + "\")'>"
+        }
+        movesTable.innerHTML += html
+    }
+    reset()
+
+    function reset() {
+        kube = new Kube()
+        //kube.highlight([0, 1, 2])
+        drawKube()
+    }
+    
+    function move(direction) {
+        kube.rotate(direction)
+        drawKube()
+    }
+    
+    function apply() {
+        kube.rotate(document.getElementById("formula").value)
+        drawKube()
+    }
+    
+    function drawKube() {
+        drawStickers(kube, stickers)
+    }
+
+    function drawStickers(kube, cells) {
+        cls = kube.U.concat(kube.L, kube.F, kube.R, kube.B, kube.D)
+        for (i=0; i<54; i++) {
+            cells[i].style.backgroundColor = (cls[i] != undefined) ? colors[cls[i]] : "#DDD"
+        }
+    } 
+
+    function reverse() {
+        let input = document.getElementById("formula")
+        input.value = input.value.split(/\s+/)
+                .reverse()
+                .map(s => s.replace(/(\w+)'|(\w+)/g, (match, p1, p2) => p1 ? p1 : p2 + "'"))
+                .join(" ")
+    }
+</script>
+
+</html>
