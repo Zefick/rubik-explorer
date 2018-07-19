@@ -31,7 +31,7 @@ class Kube {
             if (!match) break
             moves += func(match)
         }
-        moves.match(/[^]/g).forEach(s => rotate(this, s))
+        moves.split("").forEach(s => rotate(this, s))
     }
 
     highlight(colors) {
@@ -63,20 +63,14 @@ let conjoint = {
 function rotate(kube, side) {
     if ("UDLRFB".search(side) != -1) {
         kube[side] = rotate90(kube[side])
-        let sides = conjoint[side]
-        let [a, b, c, d] = conjoint[side].map(a => kube[a])
-        kube[sides[3]] = [c[6], d[1], d[2], c[7], d[4], d[5], c[8], d[7], d[8]]
-        kube[sides[2]] = [c[0], c[1], c[2], c[3], c[4], c[5], b[2], b[1], b[0]]
-        kube[sides[1]] = [a[2], a[5], a[8], b[3], b[4], b[5], b[6], b[7], b[8]]
-        kube[sides[0]] = [a[0], a[1], d[6], a[3], a[4], d[3], a[6], a[7], d[0]]
+        let [a, b, c, d] = conjoint[side].map(x => kube[x]);
+        [a[2], a[5], a[8], b[0], b[1], b[2], c[6], c[7], c[8], d[0], d[3], d[6]]
+                = [d[6], d[3], d[0], a[2], a[5], a[8], b[2], b[1], b[0], c[6], c[7], c[8]]
     }
     else if ("SME".search(side) != -1) {
-        let sides = conjoint[{S:"F",M:"L",E:"U"}[side]]
-        let [a, b, c, d] =  sides.map(a => kube[a])
-        kube[sides[3]] = [d[0], c[3], d[2], d[3], c[4], d[5], d[6], c[5], d[8]]
-        kube[sides[2]] = [c[0], c[1], c[2], b[5], b[4], b[3], c[6], c[7], c[8]]
-        kube[sides[1]] = [b[0], b[1], b[2], a[1], a[4], a[7], b[6], b[7], b[8]]
-        kube[sides[0]] = [a[0], d[7], a[2], a[3], d[4], a[5], a[6], d[1], a[8]]
+        let [a, b, c, d] =  conjoint[{S:"F",M:"L",E:"U"}[side]].map(a => kube[a]);
+        [a[1], a[4], a[7], b[3], b[4], b[5], c[3], c[4], c[5], d[1], d[4], d[7]]
+                = [d[7], d[4], d[1], a[1], a[4], a[7], b[5], b[4], b[3], c[3], c[4], c[5]]
     }
     else {
         throw new Error("unknown move: " + side)
