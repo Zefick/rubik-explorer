@@ -1,5 +1,5 @@
 
-<htlm>
+<html>
 
 <head>
     <title>Rubik</title>
@@ -50,9 +50,9 @@
             <table>
                 <tr><td>
                 <table id='kube' style="margin: 10 auto;">
-                    <tr><td><td><div><td><td>
-                    <tr><td><div><td><div><td><div><td><div>
-                    <tr><td><td><div><td><td>
+                    <tr><td><td><div></div><td><td>
+                    <tr><td><div></div><td><div></div><td><div></div><td><div></div>
+                    <tr><td><td><div></div><td><td>
                 </table>
                 <td>
                 
@@ -100,11 +100,10 @@
         ["x", "y", "z", "x&#39;", "y&#39;", "z&#39;"],
     ]
     let movesTable = document.getElementById("moves")
-    for (i in moves) {
+    for (let m1 of moves) {
         let html = "<br>"
-        for (j in moves[i]) {
-            let m = moves[i][j]
-            html += "<input type='button' class='flat move' value=\"" + m + "\" onclick='move(\"" + m + "\")'>"
+        for (let m2 of m1) {
+            html += "<input type='button' class='flat move' value=\"" + m2 + "\" onclick='move(\"" + m2 + "\")'>"
         }
         movesTable.innerHTML += html
     }
@@ -131,7 +130,8 @@
     }
 
     function drawStickers(kube, cells) {
-        cls = kube.U.concat(kube.L, kube.F, kube.R, kube.B, kube.D)
+        cls = [].concat(rotate90(kube.U), rotate180(kube.L), kube.F, 
+                rotate270(kube.R), rotate90(kube.B), rotate180(kube.D))
         for (i=0; i<54; i++) {
             cells[i].style.backgroundColor = (cls[i] != undefined) ? colors[cls[i]] : "#DDD"
         }

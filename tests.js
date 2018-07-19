@@ -29,6 +29,7 @@ function testCucles() {
         ["R U R' U' R' F R2 U' R' U' R U R' F'", 2],       // T-perm
         ["R' U2 R' D' R U' R' D R U R U' R' U' R U'", 2],  // R-perm
         ["y2 R2 Uw' R U' R U R' Uw R2 y R U' R' y", 3],     // G-perm
+        ["M2 U M2 U2 M2 U M2", 2],  // H-perm
         ["U R L D F B x U' R' L' D' F' B' y u r l d f b z S M E S' M' E' x' U2 R2 L2 D2 F2 B2", 168]
     ]
     for (i in cucles) {
