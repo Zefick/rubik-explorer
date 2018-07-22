@@ -29,13 +29,33 @@
             border: 1px solid;
         }
         div.mainArea {
+            position: relative;
             padding: 20 30;
             background-color: #EEF
-        }
-        div.mainArea {
-            display: inline-block;
+            top: 100px;
             border: 2px solid;
             border-radius: 10px;
+            margin: auto;
+            display: table;
+        }
+
+        #menu {
+            display: table;
+            margin: 0 10px;
+        }
+        div.menuItem {
+            float: left;
+            padding: 10 20;
+            font: bold 12pt 'Arial';
+            text-align: right;
+            margin: 5 5 0 0;
+            cursor: pointer;
+            background-color: #CCC;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        div.activeMenuItem {
+            background-color: #AAA
         }
     </style>
     
@@ -45,10 +65,12 @@
 
 <body onload="runTests()">
 
-    <div style="margin: auto; display:table;">
-        
-        <div class="mainArea">
-            <table>
+    <div style="margin: auto; display:table; width:800;">
+
+        <div id="menu"></div>
+
+        <div id="explorer" class="mainArea">
+            <table style="margin: auto;">
                 <tr><td>
                 <table id='kube' style="margin: 10 auto;">
                     <tr><td><td><div></div><td><td>
@@ -63,22 +85,49 @@
                 </div>
 
                 <tr><td>
-                <table>
-                    <tr><td>
-                        <input type='text' class='formula' id='formula' size='50'
-                            style="font: 16pt 'Arial'; padding: 10 10;">
-                    </td></tr>
-                    <tr><td style="padding: 10 0">
-                        <input type='button' class='flat' value='Reset' onclick='reset()'>
-                        <input type='button' class='flat' value='Apply' onclick='apply()'>
-                        <input type='button' class='flat' value='Reverse' onclick='reverse()'>
-                    </td></tr>
-                </table>
+                    <input type='text' class='formula' id='formula' size='50'
+                                style="font: 16pt 'Arial'; padding: 10 10;">
+                </td></tr>
+                <tr><td style="padding: 10 0">
+                    <input type='button' class='flat' value='Reset' onclick='reset()'>
+                    <input type='button' class='flat' value='Apply' onclick='apply()'>
+                    <input type='button' class='flat' value='Reverse' onclick='reverse()'>
+                </td></tr>
             </table>
         </div>
+
+        <div id="olls" class="mainArea"></div>
+        <div id="plls" class="mainArea"></div>
+    </div>
 </body>
 
 <script>
+
+    let items = [
+        {id: "explorer", label: "Explorer"},
+        {id: "olls", label: "OLLs"},
+        {id: "plls", label: "PLLs"}
+    ]
+
+    for (i in items) {
+        html = "<div class='menuItem' onclick='activateItem(" + i + ")'>" + items[i].label + "</div>"
+        document.getElementById("menu").innerHTML += html
+    }
+    activateItem(0)
+
+    function activateItem(index) {
+        let menuItems = document.querySelectorAll("div.menuItem")
+        for (i=0; i<menuItems.length; i++) {
+            let mainElement = document.getElementById(items[i].id)
+            if (i == index) {
+                menuItems[i].classList.add("activeMenuItem")
+                mainElement.style.display = "block"
+            } else {
+                menuItems[i].classList.remove("activeMenuItem")
+                mainElement.style.display = "none"
+            }
+        }
+    }
 
     let sides = document.querySelectorAll("#kube tr td div")
     for (i in sides) {
