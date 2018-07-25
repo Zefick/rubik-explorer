@@ -1,9 +1,10 @@
-
+<!DOCTYPE html>
 <html>
 
 <head>
     <title>Rubik explorer</title>
     <link rel="icon" type="image/png" href="icon.png">
+    <meta charset="utf-8">
     
     <style>
         input.flat {
@@ -15,10 +16,10 @@
             background-color: #CCC
         }
         input.move {
-            width: 80;
+            width: 80px;
             font: bold 12pt 'Arial';
-            padding: 5 5;
-            margin: 5 5;
+            padding: 5px 5px;
+            margin: 5px 5px;
         }
         table td.sticker {
             text-align: center;
@@ -30,13 +31,10 @@
         }
         div.mainArea {
             position: relative;
-            padding: 20 30;
-            background-color: #EEF
-            top: 100px;
+            padding: 20px 20px;
             border: 2px solid;
             border-radius: 10px;
             margin: auto;
-            display: table;
         }
 
         #menu {
@@ -45,10 +43,10 @@
         }
         div.menuItem {
             float: left;
-            padding: 10 20;
+            padding: 10px 20px;
             font: bold 12pt 'Arial';
             text-align: right;
-            margin: 5 5 0 0;
+            margin: 5px 5px 0 0;
             cursor: pointer;
             background-color: #CCC;
             border-top-left-radius: 10px;
@@ -66,14 +64,14 @@
 
 <body onload="runTests()">
 
-    <div style="margin: auto; display:table; width:800;">
+    <div style="margin: auto; display: table; width:800px;">
 
         <div id="menu"></div>
 
         <div id="explorer" class="mainArea">
             <table style="margin: auto;">
                 <tr><td>
-                <table id='kube' style="margin: 10 auto;">
+                <table id='kube' style="margin: 10px auto;">
                     <tr><td><td><div></div><td><td>
                     <tr><td><div></div><td><div></div><td><div></div><td><div></div>
                     <tr><td><td><div></div><td><td>
@@ -87,7 +85,7 @@
 
                 <tr><td>
                     <input type='text' class='formula' id='formula' size='50'
-                                style="font: 16pt 'Arial'; padding: 10 10;">
+                                style="font: 16pt 'Arial'; padding: 10px 10px;">
                 </td></tr>
                 <tr><td style="padding: 10 0">
                     <input type='button' class='flat' value='Reset' onclick='reset()'>
@@ -105,6 +103,7 @@
 <script>
 
     fillExplorer();
+
 
     let items = [
         {id: "explorer", label: "Explorer"},
