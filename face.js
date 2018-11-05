@@ -26,7 +26,10 @@ let algs = [
         data: "101001000111000100101",
         formulas: [
             "F (R U R' U') (R U R' U') (R U R' U') F'",
-            "y R U R' U R U' R' U R U2 R'"
+            "R U2 R' U' R U R' U' R U' R'",
+            "L' U2 L U L' U' L U L' U L",
+            "y R U R' U R U' R' U R U2 R'",
+            "y L' U' L U' L' U L U' L' U2 L"
         ]
     },
     {
@@ -65,21 +68,13 @@ let algs = [
         ]
     },
     {
-        name: "l",
-        type: "oll",
-        data: "111000000111010001010",
-        formulas: [
-            "F R U R' U y' R' U' R U' R'",
-            "F (R U R' U') F' L' U' L U' L' U2 L"
-        ]
-    },
-    {
         name: "Snow Flake",
         type: "oll",
         data: "010010101010101010010",
         formulas: [
-            "S (R U R' U') R' U' R' U R S'",
-            "r' R U (R U R' U') r2 R2 U R U' r'"
+            "S (R U R' U') R' (U' R' U R) S'",
+            "r' R U (R U R' U') M2 U R U' r'",
+            "l L' U' (L' U' L U) M2 U' L' U l"
         ]
     },
     {
@@ -89,6 +84,15 @@ let algs = [
         formulas: [
             "x' L' U L F L' U' L y U L' U'",
             "y2 F' U' L' U2 L U L' U' L F"
+        ]
+    },
+    {
+        name: "L",
+        type: "oll",
+        data: "010100100111000001110",
+        formulas: [
+            "r U r' (R U R' U') r U' r'",
+            "Y2 l U' l' (L U L' U') l U' l'"
         ]
     },
     {
@@ -116,6 +120,107 @@ let algs = [
         formulas: [
             "R U' R2 F R F' R U2 R'"
         ]
+    },
+    {
+        name: "Breakneck",
+        type: "oll",
+        data: "100001011011000001110",
+        formulas: [
+            "F' (L' U' L U) (L' U' L U) F"
+        ]
+    },
+    {
+        name: "Breakneck",
+        type: "oll",
+        data: "001101000110110000011",
+        formulas: [
+            "F (R U R' U') (R U R' U') F'"
+        ]
+    },
+    {
+        name: "S",
+        type: "oll",
+        data: "100001010110101000011",
+        formulas: [
+            "r U R' U R U' r'",
+            "r U r' (U R U' R') r U' r"
+        ]
+    },
+    {
+        name: "Y",
+        type: "oll",
+        data: "010010100110100100101",
+        formulas: [
+            "R' U' R U' R' U2 F (R U R' U') F'"
+        ]
+    },
+    {
+        name: "Y",
+        type: "oll",
+        data: "010010101011010101000",
+        formulas: [
+            "R U (R' U R U') (R' U R U') y R U' R' F'",
+            "y2 F U (R U2 R' U') (R U2 R' U') F'"
+        ]
+    },
+    {
+        name: "l",
+        type: "oll",
+        data: "111000000111010001010",
+        formulas: [
+            "F R U R' U y' R' U' R U' R'",
+            "F (R U R' U') F' L' U' L U' L' U2 L"
+        ]
+    },
+    {
+        name: "l",
+        type: "oll",
+        data: "110000010111000001110",
+        formulas: [
+            "F (U R U' R') (U R U' R') F'",
+            "y2 f (R U R' U') (R U R' U') f'"
+        ]
+    },
+    {
+        name: "l",
+        type: "oll",
+        data: "010100010111010001010",
+        formulas: [
+            "r U r' (U R U' R') (U R U' R') r U' r'"
+        ]
+    },
+    {
+        name: "l",
+        type: "oll",
+        data: "111000000111000000111",
+        formulas: [
+            "r U2 R' U' R2 r' U R' U' r U' r'",
+            "y R U2 R2 U' R U' R' U2 F R F'"
+        ]
+    },
+    {
+        name: "Dot",
+        type: "oll",
+        data: "010100011010110001010",
+        formulas: [
+            "(r' U' R U' R' U2 r) U (r U2 R' U' R U' r')"
+        ]
+    },
+    {
+        name: "H",
+        type: "oll",
+        data: "010010100111001010010",
+        formulas: [
+            "(R U R' U') M' U R U' r'"
+        ]
+    },
+    {
+        name: "Diagonal",
+        type: "oll",
+        data: "010010011010100010110",
+        formulas: [
+            "(r U R' U R U2 r') U2 (r U2 R' U' R U' r')"
+        ]
     }
 ]
 
@@ -127,8 +232,8 @@ class Face {
 
     renderOn(element) {
         let n = 0;
-        let html = "<div style='padding: 5px 5px; margin: 10px 10px; display: block; border: 1px solid #CCC; border-radius: 10px;'>"
-            + "<div style='font: bold 16pt Arial; padding: 5px 20px;'>" + this.alg.name + "</div>"
+        let html = "<div style='padding: 10px 10px; margin: 10px 10px; display: block; border: 1px solid #CCC; border-radius: 10px;'>"
+            + "<div style='font: bold 16pt Arial; padding: 0 10px;'>" + this.alg.name + "</div>"
             + "<div style='width:120px; height: 120px; position: relative; display: table-cell;'>"
         for (i=0; i<5; ++i) {
             for (j=0; j<5; ++j) {
@@ -144,7 +249,7 @@ class Face {
             }
         }
         html += "</div>"
-            + "<div style='padding: 10px 20px; position: relative; display: table-cell; font: 14pt Arial'>"
+            + "<div style='padding: 10px 20px; position: relative; display: table-cell; font: 14pt Consolas'>"
         this.alg.formulas.forEach(f => {
             html += "<div>" + f + "</div>"
         })
