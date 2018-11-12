@@ -10,7 +10,7 @@
     <script src="kube.js"></script>
     <script src="tests.js"></script>
     <script src="explorer.js"></script>
-    <script src="face.js"></script>
+    <script src="oll.js"></script>
 </head>
 
 <body onload="runTests()">
@@ -55,10 +55,7 @@
 
     fillExplorer();
 
-    ollsElement = document.getElementById("olls")
-    algs.filter(alg => alg.type == "oll").forEach(
-        alg => new Face(alg).renderOn(ollsElement)
-    )
+    renderOlls(document.getElementById("olls"))
 
     let items = [
         {id: "explorer", label: "Explorer"},
