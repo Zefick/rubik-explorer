@@ -5,7 +5,7 @@ let kube;
 function fillExplorer() {
     let sides = document.querySelectorAll("#kube tr td div")
     for (i in sides) {
-        let html = "<table border=1>"
+        let html = "<table>"
         for (let y=0; y<3; ++y) {
             html += "<tr><td class='sticker'><td class='sticker'><td class='sticker'>"
         }

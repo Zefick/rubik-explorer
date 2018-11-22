@@ -1,11 +1,17 @@
 
+input.formula {
+    font: 16pt 'Arial';
+    padding: 10px 10px;
+}
+
 input.flat {
     font: 12pt 'Arial';
     border: none;
     padding: 10pt 20pt;
     text-align: center;
     cursor: pointer;
-    background-color: #CCC
+    background-color: #CCC;
+    border-radius: 2px;
 }
 
 input.move {
@@ -18,10 +24,11 @@ input.move {
 table td.sticker {
     text-align: center;
     font: bold 12pt 'Arial';
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     padding: 0 0;
     border: 1px solid;
+    border-radius: 5px;
 }
 
 div.mainArea {
