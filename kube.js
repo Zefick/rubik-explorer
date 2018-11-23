@@ -45,6 +45,19 @@ class Kube {
         }
     }
 
+    /**
+     * Calculates the "fingerprint" of the kube's last layer orientation.
+     * Permutations not counted.
+     */
+    ollFingerprint() {
+        return [this.B[0], this.B[3], this.B[6],
+            this.L[8], this.U[6], this.U[3], this.U[0], this.R[8],
+            this.L[7], this.U[7], this.U[4], this.U[1], this.R[5],
+            this.L[6], this.U[8], this.U[5], this.U[2], this.R[2],
+            this.F[0], this.F[1], this.F[2]]
+                .map(x => (x == this.U[4]) ? "1" : "0").join("")
+    }
+
 }
 
 let conjoint = {

@@ -65,7 +65,11 @@ function drawStickers(kube, cells) {
 
 function reverse() {
     let input = document.getElementById("formula")
-    input.value = input.value.split(/\s+/)
+    input.value = reverse(input.value)
+}
+
+function reverse(formula) {
+    return formula.split(/\s+|[()]/)
             .reverse()
             .map(s => s.replace(/(\w+)'|(\w+)/g, (match, p1, p2) => p1 ? p1 : p2 + "'"))
             .join(" ")
